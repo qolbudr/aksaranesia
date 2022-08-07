@@ -1,3 +1,4 @@
+import 'package:aks/page/welcome.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
@@ -33,7 +34,7 @@ class _SplashState extends State<SplashScreen> {
       } else {
         Navigator.pushReplacement(context, MaterialPageRoute(
           builder: (context) {
-            return Login();
+            return Welcome();
           }
         ));
       }
@@ -70,7 +71,7 @@ class _SplashState extends State<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/logo.png', width: 80),
+                  Image.asset('assets/images/new_logo.png', width: 80),
                   SizedBox(height: 20),
                   Text("Aksaranesia", style: TextStyle(fontSize: 18)),
                 ]

@@ -1,3 +1,4 @@
+import 'package:aks/ui/elements.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
 import "package:aks/model/user_model.dart";
@@ -14,50 +15,73 @@ class TabClass extends StatelessWidget {
 			children: [
 				Container(
 					width: double.infinity,
-					height: 200,
-					color: Theme.of(context).primaryColor.withOpacity(0.2),
-					padding: EdgeInsets.all(15),
-					child: Row(
-						children: [
-							Image.asset("assets/images/classUI.png"),
-							SizedBox(width: 15),
-							Expanded(
-								child: Column(
-									mainAxisAlignment: MainAxisAlignment.center,
-									children: [
-										Container(
-											width: double.infinity,
-											decoration: BoxDecoration(
-												color: Theme.of(context).primaryColor,
-												borderRadius: BorderRadius.circular(15),
+					height: 150,
+					decoration: BoxDecoration(
+						gradient: LinearGradient(
+							colors: [
+								accent,
+								Theme.of(context).scaffoldBackgroundColor,
+							],
+							begin: const FractionalOffset(0.0, 0.0),
+							end: const FractionalOffset(0.0, 2.0),
+							stops: [0.0, 1.0],
+							tileMode: TileMode.clamp,
+						),
+					),
+					child: Column(
+					  children: [
+					    Expanded(
+					      child: Padding(
+									padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+					        child: Row(
+					        	children: [
+					        		AspectRatio(
+												aspectRatio: 1.4,
+												child: Image.asset("assets/images/classUI.png", fit: BoxFit.fitWidth),
 											),
-											padding: EdgeInsets.symmetric(horizontal: 10, vertical:5),
-											child: Center(child: Text(user.classCode ?? '', style: TextStyle(color: Colors.white)))
-										),
-										SizedBox(height: 5),
-										Container(
-											width: double.infinity,
-											decoration: BoxDecoration(
-												color: Color(0xffF9AD23),
-												borderRadius: BorderRadius.circular(15),
-											),
-											padding: EdgeInsets.symmetric(horizontal: 10, vertical:5),
-											child: Center(child: StreamBuilder<QuerySnapshot>(
-											  stream: ClassData.getTeacher(user.classCode),
-											  builder: (context, teacher) {
-											  	if(teacher.data == null || teacher.data.docs.length <= 0) {
-											  		return Text("-", style: TextStyle(color: Colors.white));
-											  	} else {
-											  		var teachers = teacher.data.docs;
-											  		return Text(teachers[0]['displayName'], style: TextStyle(color: Colors.white));
-											  	}
-											  }
-											))
-										),
-									]
-								)
+					        		SizedBox(width: 15),
+					        		Expanded(
+					        			child: Padding(
+					        			  padding: EdgeInsets.symmetric(vertical: 15),
+					        			  child: Column(
+													crossAxisAlignment: CrossAxisAlignment.start,
+					        			  	children: [
+					        			  		Text(
+															user.classCode ?? '',
+															style: TextStyle(
+																color: primary,
+																fontWeight: FontWeight.bold,
+																fontSize: 18,
+															),
+														),
+														StreamBuilder<QuerySnapshot>(
+																stream: ClassData.getTeacher(user.classCode),
+																builder: (context, teacher) {
+																	if(teacher.data == null || teacher.data.docs.length <= 0) {
+																		return Text("-", style: TextStyle(color: primary));
+																	} else {
+																		var teachers = teacher.data.docs;
+																		return Text(teachers[0]['displayName'], style: TextStyle(color: primary));
+																	}
+																}
+														),
+					        			  	]
+					        			  ),
+					        			)
+					        		),
+					        	]
+					        ),
+					      ),
+					    ),
+							Container(
+								width: double.infinity,
+								height: 20,
+								decoration: BoxDecoration(
+									color: Theme.of(context).scaffoldBackgroundColor,
+									borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+								),
 							),
-						]
+					  ],
 					)
 				),
 				Expanded(
@@ -68,8 +92,7 @@ class TabClass extends StatelessWidget {
 					  		return Container();
 					  	} else {
 					  		var classmates = classmate.data.docs;
-					  		return ListView.separated(
-					  			separatorBuilder: (context, index) => Divider(),
+					  		return ListView.builder(
 					  			itemCount: classmates.length,
 					  			itemBuilder: (context, index) {
 					  				return ListTile(
@@ -81,21 +104,28 @@ class TabClass extends StatelessWidget {
 					  								classmates[index]['points'],
 					  								classmates[index]['bio'],
 					  								classmates[index]['displayName'],
+														classmates[index]['classCode'],
 					  							);
 					  						}
 					  					)),
 					  					contentPadding: EdgeInsets.symmetric(horizontal:15, vertical: 0),
-					  					leading: CircleAvatar(
+					  					leading: Padding(
+					  					  padding: EdgeInsets.only(bottom: 15),
+					  					  child: CircleAvatar(
 					              backgroundColor: Colors.grey,
 					              radius: 20,
 					              child: ClipOval(
-					                child: classmates[index]['photoURL'] == '' ? 
+					                child: classmates[index]['photoURL'] == '' ?
 					                  FadeInImage(image: AssetImage('assets/images/user.png'), placeholder: AssetImage('assets/images/user.png'))
 					                :
 					                  FadeInImage(image: NetworkImage(classmates[index]['photoURL']), placeholder: AssetImage('assets/images/user.png')),
 					              ),
 					            ),
-					            title: Text(classmates[index]['displayName']),
+					  					),
+					            title: Padding(
+					              padding: EdgeInsets.only(bottom: 5),
+					              child: Text(classmates[index]['displayName'], style: TextStyle(fontWeight: FontWeight.bold)),
+					            ),
 					            subtitle: Text(classmates[index]['type'] == 0 ? 'Murid' : 'Guru'),
 					            trailing: user.type == 1 ? Container(
 					              child: Wrap(

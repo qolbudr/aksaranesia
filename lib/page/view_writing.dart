@@ -10,7 +10,10 @@ class ViewWriting extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: AppBar(
-				title: Text(""),
+				leading: IconButton(
+					icon: Icon(Icons.close),
+					onPressed: () => Navigator.of(context).pop(),
+				),
 				elevation: 0,
 			),
 			body: StreamBuilder<DocumentSnapshot>(
@@ -21,7 +24,7 @@ class ViewWriting extends StatelessWidget {
 					} else {
 						var data = snapshot.data;
 						return Padding(
-						  padding: const EdgeInsets.all(15),
+						  padding: const EdgeInsets.symmetric(horizontal: 15),
 						  child: Column(
 						  	children: [
 						  		Expanded(

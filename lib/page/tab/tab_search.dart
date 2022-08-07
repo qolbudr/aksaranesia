@@ -3,161 +3,121 @@ import "package:aks/ui/elements.dart";
 import "package:aks/page/view_web.dart";
 
 class TabSearch extends StatelessWidget {
-	@override
-	Widget build(BuildContext context) {
-		return Padding(
-			padding: EdgeInsets.all(15),
-			child: Column(
-				crossAxisAlignment: CrossAxisAlignment.center,
-				children: [
-					Image.asset('assets/images/searchUI.png', width: 200),
-					SizedBox(height: 10),
-					Input(
-						icon: Icons.search,
-						hintText: "Cari Buku",
-					),
-					SizedBox(height: 10),
-					Expanded(
-					  child: ListView(
-					    children: [
-					      GridView.count(
-					      	shrinkWrap: true,
-					      	physics: NeverScrollableScrollPhysics(),
-					      	crossAxisCount: 2,
-					      	crossAxisSpacing: 3,
-					      	mainAxisSpacing: 3,
-					      	childAspectRatio: 1,
-					      	children: [
-					      		Container(
-					      			decoration: BoxDecoration(
-					      				border: Border.all(
-					      					color: Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle.color.withOpacity(0.1),
-					      				),
-					      				borderRadius: BorderRadius.all(Radius.circular(15))
-					      			),
-					      		  child: InkWell(
-					      		  	onTap: () => Navigator.push(context, MaterialPageRoute(
-					      		  		builder: (context) => ViewWeb(url: "https://sinta.ristekbrin.go.id/")
-					      		  	)),
-					      		    child: Center(
-					      		    	child: Column(
-					      		    		mainAxisAlignment: MainAxisAlignment.center,
-					      		    		crossAxisAlignment: CrossAxisAlignment.center,
-					      		    		children: [
-					      		    			Image.asset("assets/images/sinta_logo.png", width: 100),
-					      		    			// Text("Jurnal Sinta")
-					      		    		],
-					      		    	)
-					      		    ),
-					      		  ),
-					      		),
-					      		Container(
-					      			decoration: BoxDecoration(
-					      				border: Border.all(
-					      					color: Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle.color.withOpacity(0.1),
-					      				),
-					      				borderRadius: BorderRadius.all(Radius.circular(15))
-					      			),
-					      		  child: InkWell(
-					      		  	borderRadius: BorderRadius.all(Radius.circular(15)),
-					      		  	onTap: () => Navigator.push(context, MaterialPageRoute(
-					      		  		builder: (context) => ViewWeb(url: "https://www.gutenberg.org/")
-					      		  	)),
-					      		    child: Center(
-					      		    	child: Column(
-					      		    		mainAxisAlignment: MainAxisAlignment.center,
-					      		    		crossAxisAlignment: CrossAxisAlignment.center,
-					      		    		children: [
-					      		    			Image.asset("assets/images/pg-logo.png", width: 80),
-					      		    			// Text("Gutenberg")
-					      		    		],
-					      		    	)
-					      		    ),
-					      		  ),
-					      		),
-					      		Container(
-					      			decoration: BoxDecoration(
-					      				border: Border.all(
-					      					color: Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle.color.withOpacity(0.1),
-					      				),
-					      				borderRadius: BorderRadius.all(Radius.circular(15))
-					      			),
-					      		  child: InkWell(
-					      		  	borderRadius: BorderRadius.all(Radius.circular(15)),
-					      		  	onTap: () => Navigator.push(context, MaterialPageRoute(
-					      		  		builder: (context) => ViewWeb(url: "http://www.bookyards.com/mobile/authors.php")
-					      		  	)),
-					      		    child: Center(
-					      		    	child: Column(
-					      		    		mainAxisAlignment: MainAxisAlignment.center,
-					      		    		crossAxisAlignment: CrossAxisAlignment.center,
-					      		    		children: [
-					      		    			Image.asset("assets/images/bookyards.png", width: 80),
-					      		    			// Text("Bookyards")
-					      		    		],
-					      		    	)
-					      		    ),
-					      		  ),
-					      		),
-					      		Container(
-					      			decoration: BoxDecoration(
-					      				border: Border.all(
-					      					color: Theme.of(context).bottomNavigationBarTheme.selectedLabelStyle.color.withOpacity(0.1),
-					      				),
-					      				borderRadius: BorderRadius.all(Radius.circular(15))
-					      			),
-					      		  child: InkWell(
-					      		  	borderRadius: BorderRadius.all(Radius.circular(15)),
-					      		  	onTap: () => Navigator.push(context, MaterialPageRoute(
-					      		  		builder: (context) => ViewWeb(url: "https://manybooks.net/")
-					      		  	)),
-					      		    child: Center(
-					      		    	child: Column(
-					      		    		mainAxisAlignment: MainAxisAlignment.center,
-					      		    		crossAxisAlignment: CrossAxisAlignment.center,
-					      		    		children: [
-					      		    			Image.asset("assets/images/manybooks.jpg", height: 80),
-					      		    			// Text("Manybooks")
-					      		    		],
-					      		    	)
-					      		    ),
-					      		  ),
-					      		),
-					      		// CategoryContainer(color: Color(0xff386071), text: "Misteri"),
-					      		// CategoryContainer(color: Color(0xffF9AD23), text: "Romantis"),
-					      		// CategoryContainer(color: Color(0xff64B5F6), text: "Fantasi"),
-					      		// CategoryContainer(color: Color(0xff818181), text: "Pengetahuan"),
-					      		// CategoryContainer(color: Color(0xffF9AD23), text: "Sosial"),
-					      		// CategoryContainer(color: Color(0xff386071), text: "Sejarah"),
-					      		// CategoryContainer(color: Color(0xff818181), text: "Ekonomi"),
-					      		// CategoryContainer(color: Color(0xff64B5F6), text: "Self Improvement"),
-
-					      	],
-					      ),
-					    ],
-					  ),
-					)
-				],
-			)
-		);
-	}
-}
-
-class CategoryContainer extends StatelessWidget {
-	CategoryContainer({this.color, this.text});
-	final Color color;
-	final String text;
+	List<Map<String, String>> source = [
+		{
+			'title': 'Wattpad',
+			'logo': 'assets/images/source/wattpad.png',
+			'url': 'https://www.wattpad.com/search',
+		},
+		{
+			'title': 'Sinta',
+			'logo': 'assets/images/source/sinta.png',
+			'url': 'https://sinta.kemdikbud.go.id/journals',
+		},
+		{
+			'title': 'Project Gutenberg',
+			'logo': 'assets/images/source/gutenberg.png',
+			'url': 'https://www.gutenberg.org/ebooks/',
+		},
+		{
+			'title': 'Many Books',
+			'logo': 'assets/images/source/manybooks.png',
+			'url': 'https://manybooks.net/search-book',
+		},
+		{
+			'title': 'Books Yard',
+			'logo': 'assets/images/source/booksyard.png',
+			'url': 'https://www.bookyards.com/en/welcome',
+		},
+		{
+			'title': 'Google Scholar',
+			'logo': 'assets/images/source/scholar.png',
+			'url': 'https://scholar.google.com/',
+		},
+		{
+			'title': 'Kamus Besar Bahasa Indonesia',
+			'logo': 'assets/images/source/kbbi.png',
+			'url': 'https://kbbi.kemdikbud.go.id/',
+		},
+	];
 
 	@override
 	Widget build(BuildContext context) {
-		return Card(
-			elevation: 0,
-			color: color,
-			child: Center(
-				child: Text(text, style: TextStyle(color: Colors.white)),
-			)
+		return SingleChildScrollView(
+		  child: Padding(
+		  	padding: EdgeInsets.all(15),
+		  	child: Column(
+		  		crossAxisAlignment: CrossAxisAlignment.start,
+		  		children: [
+		  			Padding(
+		  				padding: const EdgeInsets.only(top: 5, bottom: 15),
+		  				child: Text(
+		  					'Sumber bacaan yang bisa kamu baca',
+		  					style: TextStyle(
+		  						fontWeight: FontWeight.bold,
+		  						fontSize: 16,
+		  					),
+		  				),
+		  			),
+		  			ListView.separated(
+		  				physics: NeverScrollableScrollPhysics(),
+		  				shrinkWrap: true,
+		  				itemCount: source.length-1,
+		  				itemBuilder: (BuildContext context, int index) {
+		  					return InkWell(
+		  						onTap: () => Navigator.push(context, MaterialPageRoute(
+		  								builder: (context) => ViewWeb(url: source[index]['url'])
+		  						)),
+		  						child: Container(
+		  							padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+		  							decoration: BoxDecoration(
+		  								color: Colors.white,
+		  								borderRadius: BorderRadius.circular(20),
+		  							),
+		  							child: Row(
+		  								children: [
+                        Image.asset(source[index]['logo'], width: 50),
+		  									SizedBox(width: 10),
+		  									Expanded(child: Text(source[index]['title'])),
+		  								],
+		  							),
+		  						),
+		  					);
+		  				},
+		  				separatorBuilder: (BuildContext context, int index) => const SizedBox(height: 10),
+		  			),
+						Padding(
+							padding: const EdgeInsets.only(top: 20, bottom: 15),
+							child: Text(
+								'Ada KBBI juga loh yang bisa kamu akses',
+								style: TextStyle(
+									fontWeight: FontWeight.bold,
+									fontSize: 16,
+								),
+							),
+						),
+						InkWell(
+							onTap: () => Navigator.push(context, MaterialPageRoute(
+									builder: (context) => ViewWeb(url: source.last['url'])
+							)),
+							child: Container(
+								padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+								decoration: BoxDecoration(
+									color: Colors.white,
+									borderRadius: BorderRadius.circular(20),
+								),
+								child: Row(
+									children: [
+										Image.asset(source.last['logo']),
+										SizedBox(width: 10),
+										Expanded(child: Text(source.last['title'])),
+									],
+								),
+							),
+						),
+		  		],
+		  	),
+		  ),
 		);
 	}
 }
-
-

@@ -1,3 +1,5 @@
+import 'package:aks/page/welcome.dart';
+import 'package:aks/ui/elements.dart';
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import "package:aks/model/dark_mode.dart";
@@ -14,7 +16,8 @@ class Settings extends StatelessWidget {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 0,
-        title: Text("Pengaturan", style: TextStyle(fontSize: 18))
+        centerTitle: true,
+        title: Text("Pengaturan", style: TextStyle(fontSize: 18, color: Theme.of(context).textTheme.titleLarge.color, fontWeight: FontWeight.bold)),
       ),
       body: Column(
         children: [
@@ -22,24 +25,25 @@ class Settings extends StatelessWidget {
             child: ListView(
               children: [
                 Consumer<ThemeNotifier>(
-                  builder: (context,notifier,child) => SwitchListTile(
-                  title: Text("Mode Gelap", style: TextStyle(fontSize: 15)),
-                    onChanged: (val){
-                      notifier.toggleChangeTheme();
-                      if(val == false) {
-                        SystemChrome.setSystemUIOverlayStyle(
-                          SystemUiOverlayStyle.light.copyWith(statusBarIconBrightness: Brightness.dark, statusBarColor: Colors.white, systemNavigationBarColor: Colors.white),
-                        );
-                      } else {
-                        SystemChrome.setSystemUIOverlayStyle(
-                          SystemUiOverlayStyle.dark.copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.black, systemNavigationBarColor: Colors.black),
-                        );
-                      }
-                    },
-                    value: notifier.darkMode ,
+                  builder: (context,notifier,child) => ListTile(
+                    title: Text("Mode Gelap", style: TextStyle(fontSize: 15)),
+                    trailing: Switch(
+                      onChanged: (val){
+                        notifier.toggleChangeTheme();
+                        if(val == false) {
+                          SystemChrome.setSystemUIOverlayStyle(
+                            SystemUiOverlayStyle.light.copyWith(statusBarIconBrightness: Brightness.dark, statusBarColor: Colors.white, systemNavigationBarColor: Colors.white),
+                          );
+                        } else {
+                          SystemChrome.setSystemUIOverlayStyle(
+                            SystemUiOverlayStyle.dark.copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.black, systemNavigationBarColor: Colors.black),
+                          );
+                        }
+                      },
+                      value: notifier.darkMode,
+                    ),
                   ),
                 ),
-                Divider(),
                 ListTile(
                   title: Text("Edit Profil", style: TextStyle(fontSize: 15)),
                   onTap: () {
@@ -50,7 +54,6 @@ class Settings extends StatelessWidget {
                     ));
                   },
                 ),
-                Divider(),
                 ListTile(
                   title: Text("Edit Keamanan", style: TextStyle(fontSize: 15)),
                   onTap: () {
@@ -61,13 +64,12 @@ class Settings extends StatelessWidget {
                     ));
                   },
                 ),
-                Divider(),
                 ListTile(
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Keluar", style: TextStyle(fontSize: 15)),
-                      Icon(Icons.logout),
+                      Icon(Icons.logout, color: secondary),
                     ],
                   ),
                   onTap: () async {
@@ -75,7 +77,7 @@ class Settings extends StatelessWidget {
                     await _auth.signOut();
                     return Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                       builder: (context) {
-                        return Login();
+                        return Welcome();
                       }
                     ), (Route<dynamic> route) => false);
                   },

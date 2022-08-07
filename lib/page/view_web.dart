@@ -9,8 +9,10 @@ class ViewWeb extends StatelessWidget {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: AppBar(
-				title: Text("Web", style: TextStyle(fontSize: 18)),
-				elevation: 0
+				elevation: 0,
+				centerTitle: true,
+				backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+				title: Text("Web View", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleLarge.color)),
 			),
 			body: SafeArea(
 			  child: Column(
@@ -23,7 +25,7 @@ class ViewWeb extends StatelessWidget {
 			  		)
 			  	]
 			  ),
-			)
+			),
 		);
 	}
 }

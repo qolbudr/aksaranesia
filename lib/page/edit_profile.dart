@@ -112,8 +112,9 @@ class _EditProfile extends State<EditProfile> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        title: Text("Edit Profil", style: TextStyle(fontSize: 18, color: Theme.of(context).shadowColor))
+        title: Text("Edit Profil", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleLarge.color)),
       ),
       body: Column(
         children: [
@@ -142,7 +143,7 @@ class _EditProfile extends State<EditProfile> {
                             ),
                           ),
                           Positioned(
-                            right: 10,
+                            right: 2,
                             bottom: 0,
                             child: InkWell(
                               onTap: () {},
@@ -190,7 +191,7 @@ class TextArea extends StatelessWidget {
     this.controller, 
     this.hintSize = 14, 
     this.hintText, 
-    this.contentPadding = const EdgeInsets.symmetric(vertical: 15, horizontal: 25),  
+    this.contentPadding = const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
     this.transparency = 0.1, this.maxLines = 6, 
     this.icon, this.secure = false, 
     this.maxLength = 20000,
@@ -205,6 +206,7 @@ class TextArea extends StatelessWidget {
   final EdgeInsetsGeometry contentPadding;
   Widget build(BuildContext context) {
     return TextFormField(
+      textAlignVertical: TextAlignVertical.center,
       expands: expands,
       maxLines: maxLines,
       maxLength: maxLength,
@@ -212,9 +214,14 @@ class TextArea extends StatelessWidget {
       obscureText: secure,
       style: TextStyle(fontSize: 14),
       decoration: InputDecoration(
+        prefixIcon: Padding(
+          padding: EdgeInsets.only(bottom: (maxLines - 1) * 18.0),
+          child: Icon(Icons.edit_outlined, color: secondary),
+        ),
+        prefixIconColor: secondary,
         counterText: "",
         filled: true,
-        fillColor: Colors.lightBlue.withOpacity(transparency),
+        fillColor: Colors.white,
         hintText: hintText,
         hintStyle: TextStyle(
           fontSize: hintSize,
@@ -222,25 +229,25 @@ class TextArea extends StatelessWidget {
         ),
         contentPadding: contentPadding,
         disabledBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(5), 
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: Colors.transparent)
         ),
         enabledBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(5), 
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: Colors.transparent)
         ), 
         focusedBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(5), 
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: Colors.transparent)
         ),
         errorBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(5), 
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: Colors.transparent)
         ),
         focusedErrorBorder: UnderlineInputBorder(
-          borderRadius: BorderRadius.circular(5), 
+          borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(color: Colors.transparent)
-        )
+        ),
       ),
     );
   }

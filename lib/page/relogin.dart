@@ -71,6 +71,14 @@ class _ReLogin extends State<ReLogin> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            'Edit Keamanan',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.titleLarge.color),
+          ),
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -87,13 +95,13 @@ class _ReLogin extends State<ReLogin> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Masukkan Password", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text("Masukkan Katasandi", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       SizedBox(height: 10),
-                      Text("Untuk mengganti keamanan akun anda", style: TextStyle(fontSize: 14)),
+                      Text("Untuk memperbarui katasandi anda", style: TextStyle(fontSize: 14)),
                       SizedBox(height: 30),
-                      Input(controller: _pass, hintText: "Password", icon: Icons.lock_outlined, secure: true),
+                      Input(controller: _pass, hintText: "Katasandi", icon: Icons.lock_outlined, secure: true),
                       SizedBox(height: 40),
-                      Button(text: isLoading ? "Mengotentikasi..." : "Oke", color: Colors.blue, onPressed: isLoading ? null : () {
+                      Button(text: isLoading ? "Mengotentikasi..." : "Simpan", color: Colors.blue, onPressed: isLoading ? null : () {
                         validateForm(context);
                       }),
                     ]
