@@ -1,4 +1,4 @@
-package com.aksaranesia.app
+package com.aksaranesia2.app
 
 import io.flutter.embedding.android.FlutterActivity
 
