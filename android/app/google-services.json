@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122435812780:android:601c58b0ade051923f0e09",
+        "android_client_info": {
+          "package_name": "com.newaksaranesia.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122435812780-rvui7bg9bv98sso12nton3om51r3cjg0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyfqtz3d0We-TfRsAEsWLZpvpjpzeoFj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122435812780-rvui7bg9bv98sso12nton3om51r3cjg0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
