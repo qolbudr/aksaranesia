@@ -1,3 +1,4 @@
+import 'package:aks/page/view_web.dart';
 import 'package:flutter/material.dart';
 import 'package:aks/ui/elements.dart';
 import 'package:aks/function/validate_form.dart';
@@ -19,6 +20,7 @@ class RegisterState extends State<Register> {
   String tipeUser = '0';
   String errorText = "";
   bool isLoading = false;
+  bool isEnabled = false;
 
   final List<Map<String, dynamic>> _items = [
     {
@@ -203,9 +205,32 @@ class RegisterState extends State<Register> {
                         //   text: "Pilih Kelas",
                         //   currentSelectedValue: tipeUser,
                         // ),
+                        SizedBox(height: 15),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: isEnabled,
+                              onChanged: (value) => setState(() {
+                                isEnabled = !isEnabled;
+                              }),
+                            ),
+                            Expanded(
+                              child: Wrap(
+                                direction: Axis.horizontal,
+                                children: [
+                                  Text("Saya setuju dengan ", style: TextStyle(fontSize: 10)),
+                                  InkWell(
+                                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ViewWeb(url: 'https://pages.flycricket.io/aksaranesia-co/privacy.html'))),
+                                    child: Text("Sayarat dan Ketentuan serta Kebijakan Privasi", style: TextStyle(color: Colors.blue, fontSize: 10))
+                                  )
+                                ]
+                              ),
+                            ),
+                          ],
+                        ),
                         SizedBox(height: 25),
                         Button(
-                          onPressed: isLoading ? null : () => validateForm(context, int.parse(tipeUser)), 
+                          onPressed: isEnabled ? isLoading ? null : () => validateForm(context, int.parse(tipeUser)) : null, 
                           color: Colors.blue, 
                           text: isLoading ? "Sedang Mendaftar..." : "Daftar"
                         ),
