@@ -220,7 +220,7 @@ class RegisterState extends State<Register> {
                                 children: [
                                   Text("Saya setuju dengan ", style: TextStyle(fontSize: 10)),
                                   InkWell(
-                                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ViewWeb(url: 'https://pages.flycricket.io/aksaranesia-co/privacy.html'))),
+                                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ViewWeb(url: 'https://sites.google.com/view/tosaksaranesia/halaman-muka'))),
                                     child: Text("Sayarat dan Ketentuan serta Kebijakan Privasi", style: TextStyle(color: Colors.blue, fontSize: 10))
                                   )
                                 ]
